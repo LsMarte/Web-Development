@@ -10,6 +10,17 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sen:wght@800&family=Inter:wght@300;400;600;700&family=Roboto:wght@300;400;500&family=Noto+Serif:wght@400;600&family=Saira+Stencil+One:wght@400&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="index.css">
+        <!-- Preload critical resources (invisible) -->
+  <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles.css"></noscript>
+  
+  <!-- Lazy-load scripts -->
+  <script defer src="script.js"></script>
+  
+  <!-- Inline critical CSS (hidden in <head>) -->
+  <style>
+    /* Minimal above-the-fold styles here */
+  </style>
 </head>
 <body>
     <!-- Header -->
@@ -251,6 +262,17 @@
             </div>
         </div>
     </section>
+     <!-- Images: Hidden lazy-loading -->
+  <img src="placeholder.jpg" data-src="real-image.jpg" alt="" loading="lazy" style="display: none;">
+  <script>
+    // Dynamically load hidden images
+    document.addEventListener("DOMContentLoaded", function() {
+      const lazyImages = [].slice.call(document.querySelectorAll("img[data-src]"));
+      lazyImages.forEach(function(img) {
+        img.setAttribute("src", img.getAttribute("data-src"));
+      });
+    });
+  </script>
 
     <footer>
         <p class="footer-text">Connect with me on social media</p>
@@ -264,6 +286,8 @@
         <p class="copyright">
             © 2023 Luis Marte. All Rights Reserved.
         </p>
+        <!-- Hidden privacy link (access via URL or inspectors) -->
+  <a href="privacy-policy.html" style="opacity: 0; position: absolute; width: 0; height: 0;">Privacy</a>
     </footer>
 
     <script src="index.js"> </script>
