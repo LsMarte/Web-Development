@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sen:wght@800&family=Inter:wght@300;400;600;700&family=Roboto:wght@300;400;500&family=Noto+Serif:wght@400;600&family=Saira+Stencil+One:wght@400&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.php">
         <!-- Preload critical resources (invisible) -->
   <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="styles.css"></noscript>
@@ -223,6 +224,7 @@
     </section>
 
     <!-- Contact Section -->
+ <form Action="https://formsubmit.co/Roandy1017@gmail.com" method="POST">
     <section id="contact">
         
         <h2 class="section-title">Contact <span>Me</span></h2>
@@ -243,25 +245,25 @@
                 </div>
             </div>
             <div class="contact-form">
-                <form Action="https://formsubmit.co/Roandy1017@gmail.com" method="POST">
                 <form id="contactForm">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Name" required>
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" class="contact-inputs" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Your Email" required>
+                        <input type="email" name="email" class="form-control" placeholder="Your Email" class="contact-inputs" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Subject">
+                        <input type="text" name="subject" class="form-control" placeholder="Subject" class="contact-inputs" required>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="Your Message" required></textarea>
+                        <textarea class="form-control" name="message" placeholder="Your Message" class="contact-inputs" required></textarea>
                     </div>
                     <button type="submit" class="cta-button">Send Message</button>
                 </form>
             </div>
         </div>
     </section>
+ </form>
      <!-- Images: Hidden lazy-loading -->
   <img src="placeholder.jpg" data-src="real-image.jpg" alt="" loading="lazy" style="display: none;">
   <script>
