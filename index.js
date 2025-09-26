@@ -1,4 +1,60 @@
- // Mobile Menu Toggle
+// Unificación de scripts: todo en un solo DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Typewriter effect for About Me section
+    const aboutTitles = [
+        'Frontend Developer',
+        'Computer Science Programming',
+        'Web Design',
+        'Content Creator'
+    ];
+    const aboutTypewriter = document.getElementById('about-typewriter');
+    if (aboutTypewriter) {
+        let titleIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+        let delay = 130;
+        function type() {
+            const current = aboutTitles[titleIdx];
+            if (isDeleting) {
+                aboutTypewriter.textContent = current.substring(0, charIdx--);
+                delay = 70;
+                if (charIdx < 0) {
+                    isDeleting = false;
+                    titleIdx = (titleIdx + 1) % aboutTitles.length;
+                    delay = 1100;
+                }
+            } else {
+                aboutTypewriter.textContent = current.substring(0, charIdx++);
+                delay = 130;
+                if (charIdx > current.length) {
+                    isDeleting = true;
+                    delay = 1800;
+                }
+            }
+            setTimeout(type, delay);
+        }
+        type();
+    }
+
+    // Animación de entrada para .animate-on-scroll usando Intersection Observer
+    const animatedEls = document.querySelectorAll('.animate-on-scroll');
+    if ('IntersectionObserver' in window && animatedEls.length > 0) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.18 });
+        animatedEls.forEach(el => observer.observe(el));
+    } else {
+        // Fallback: mostrar todo si no hay soporte
+        animatedEls.forEach(el => el.classList.add('visible'));
+    }
+
+
+// Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
         
