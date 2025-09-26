@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Luis Marte - Portfolio of a Frontend Developer specializing in web development, WordPress, and programming">
-    <title>Luis Marte | Frontend Developer Portfolio</title>
+    <title>Luis Marte | F-Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sen:wght@800&family=Inter:wght@300;400;600;700&family=Roboto:wght@300;400;500&family=Noto+Serif:wght@400;600&family=Saira+Stencil+One:wght@400&display=swap">
@@ -44,7 +44,81 @@
         <div class="hero-content slide-in-left">
             <div class="hero-subtitle">Hello It's Me</div>
             <h1 class="hero-title">Luis Marte</h1>
-            <div class="hero-job">I'm a <span>Frontend Developer</span></div>
+            <div class="hero-job"> <span>I'm a </span> 
+                <script>
+            // Gradient typing effect for 'Hello It\'s Me Luis Marte' (más grande y más lento)
+            document.addEventListener('DOMContentLoaded', function() {
+                const text = "Hello It's Me";
+                const el = document.getElementById('typing-gradient');
+                let i = 0;
+                function typeGradient() {
+                    if (i <= text.length) {
+                        el.innerHTML = `<span style='background:linear-gradient(90deg,#06b6d4,#2563eb,#00fff7,#ff61f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;font-weight:800;font-size:3.2rem;letter-spacing:0.04em;line-height:1.1;'>${text.slice(0,i)}</span>`;
+                        i++;
+                        setTimeout(typeGradient, 140);
+                    }
+                }
+                typeGradient();
+            });
+
+            // Typing animation for roles (más grande y más lento)
+            document.addEventListener('DOMContentLoaded', function() {
+                const roles = [
+                    'Frontend Developer',
+                    'Computer Science Programming',
+                    'Web Design'
+                ];
+                const el = document.getElementById('typing-roles');
+                let roleIdx = 0, charIdx = 0, isDeleting = false;
+                function typeRole() {
+                    const current = roles[roleIdx];
+                    if (!isDeleting) {
+                        el.innerHTML = `<span style='background:linear-gradient(90deg,#06b6d4,#2563eb,#00fff7,#ff61f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;font-weight:700;font-size:2.2rem;line-height:1.1;'>${current.slice(0,charIdx)}</span><span class='typing-cursor'>|</span>`;
+                        if (charIdx < current.length) {
+                            charIdx++;
+                            setTimeout(typeRole, 110);
+                        } else {
+                            setTimeout(() => { isDeleting = true; typeRole(); }, 1800);
+                        }
+                    } else {
+                        el.innerHTML = `<span style='background:linear-gradient(90deg,#06b6d4,#2563eb,#00fff7,#ff61f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;font-weight:700;font-size:2.2rem;line-height:1.1;'>${current.slice(0,charIdx)}</span><span class='typing-cursor'>|</span>`;
+                        if (charIdx > 0) {
+                            charIdx--;
+                            setTimeout(typeRole, 60);
+                        } else {
+                            isDeleting = false;
+                            roleIdx = (roleIdx+1)%roles.length;
+                            setTimeout(typeRole, 700);
+                        }
+                    }
+                }
+                typeRole();
+            });
+            </script>
+        <!-- Efecto de partículas animadas -->
+        <script>
+            // Particles background effect (simple, performant)
+            document.addEventListener('DOMContentLoaded', function() {
+                const bg = document.getElementById('particles-bg');
+                if(bg) {
+                    for(let i=0;i<18;i++) {
+                        const s = document.createElement('span');
+                        s.className = 'particle';
+                        s.style.left = Math.random()*100+'vw';
+                        s.style.top = Math.random()*100+'vh';
+                        s.style.width = s.style.height = (Math.random()*18+12)+'px';
+                        s.style.opacity = Math.random()*0.18+0.12;
+                        s.style.background = 'linear-gradient(120deg,#06b6d4,#2563eb,#00fff7)';
+                        s.style.position = 'absolute';
+                        s.style.borderRadius = '50%';
+                        s.style.filter = 'blur(2px)';
+                        s.style.zIndex = 0;
+                        bg.appendChild(s);
+                    }
+                }
+            });
+        </script>
+                <span id="typing-roles" class="typing-roles"></span></div>
             <p class="hero-description">
                 I recently graduated from Quincy College with a degree in Computer Science Programming and am bilingual in English and Spanish. 
                 As a former student-athlete, I have a strong foundation in teamwork, discipline, and time management, 
@@ -295,3 +369,4 @@
     <script src="index.js"> </script>
 </body>
 </html>
+
