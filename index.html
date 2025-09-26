@@ -24,6 +24,8 @@
   </style>
 </head>
 <body>
+    <!--particles background-->
+    <div id="particle-bg" class="particles"></div>
     <!-- Header -->
     <header id="header">
         <a href="#" class="logo">Portfo<span>lio.</span></a>
@@ -65,8 +67,8 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const roles = [
                     'Frontend Developer',
-                    'Computer Science Programming',
-                    'Web Design'
+                    'Computer Programmer',
+                    'Web Designer'
                 ];
                 const el = document.getElementById('typing-roles');
                 let roleIdx = 0, charIdx = 0, isDeleting = false;
@@ -140,11 +142,11 @@
 
     <!-- About Section -->
     <section id="about">
-        <h2 class="section-title">About <span>Me</span></h2>
-        <div class="about-container">
+        <h2 class="section-title gradient-text animate-on-scroll">About <span>Me</span></h2>
+        <div class="about-container section-frame animate-on-scroll">
             <img src="Im1.png" alt="Luis Marte" class="about-image">
             <div class="about-content">
-                <h3 class="about-title">Front Developer</h3>
+                <h3 class="about-title"><span id="about-typewriter" class="typewriter"></span></h3>
                 <p class="hero-description">
                     I have gained hands-on experience with web technologies and multiple programming languages, 
                     and I am committed to developing as a web developer. My background in baseball has taught me 
@@ -369,4 +371,5 @@
     <script src="index.js"> </script>
 </body>
 </html>
+
 
