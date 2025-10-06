@@ -1,375 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Luis Marte - Portfolio of a Frontend Developer specializing in web development, WordPress, and programming">
-    <title>Luis Marte | F-Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sen:wght@800&family=Inter:wght@300;400;600;700&family=Roboto:wght@300;400;500&family=Noto+Serif:wght@400;600&family=Saira+Stencil+One:wght@400&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="index.php">
-        <!-- Preload critical resources (invisible) -->
-  <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="styles.css"></noscript>
-  
-  <!-- Lazy-load scripts -->
-  <script defer src="script.js"></script>
-  
-  <!-- Inline critical CSS (hidden in <head>) -->
-  <style>
-    /* Minimal above-the-fold styles here */
-  </style>
-</head>
-<body>
-    <!--particles background-->
-    <div id="particle-bg" class="particles"></div>
-    <!-- Header -->
-    <header id="header">
-        <a href="#" class="logo">Portfo<span>lio.</span></a>
-        <ul class="nav-links">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section id="hero">
-        <div class="hero-content slide-in-left">
-            <div class="hero-subtitle">Hello It's Me</div>
-            <h1 class="hero-title">Luis Marte</h1>
-            <div class="hero-job"> <span>I'm a </span> 
-                <script>
-            // Gradient typing effect for 'Hello It\'s Me Luis Marte' (más grande y más lento)
-            document.addEventListener('DOMContentLoaded', function() {
-                const text = "Hello It's Me";
-                const el = document.getElementById('typing-gradient');
-                let i = 0;
-                function typeGradient() {
-                    if (i <= text.length) {
-                        el.innerHTML = `<span style='background:linear-gradient(90deg,#06b6d4,#2563eb,#00fff7,#ff61f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;font-weight:800;font-size:3.2rem;letter-spacing:0.04em;line-height:1.1;'>${text.slice(0,i)}</span>`;
-                        i++;
-                        setTimeout(typeGradient, 140);
-                    }
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description"
+            content="Luis Marte - Frontend Developer & Computer Science Graduate specializing in web development, WordPress, and modern programming solutions">
+        <meta name="keywords"
+            content="Frontend Developer, Web Developer, Computer Science, WordPress, JavaScript, HTML, CSS, Boston Developer">
+        <meta name="author" content="Luis Marte">
+        <meta property="og:title" content="Luis Marte | Frontend Developer Portfolio">
+        <meta property="og:description"
+            content="Experienced Frontend Developer with expertise in modern web technologies">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="Img/004.png">
+
+        <title>Luis Marte | Frontend Developer Portfolio</title>
+
+        <!-- Preconnect to external domains -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+        <!-- Optimized font loading -->
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <!-- Critical CSS inline -->
+        <style>
+            :root {
+                --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                --dark-bg: #0a0a0a;
+                --card-bg: rgba(255, 255, 255, 0.05);
+                --text-primary: #ffffff;
+                --text-secondary: #b0b0b0;
+                --border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Inter', sans-serif;
+                background: var(--dark-bg);
+                color: var(--text-primary);
+                line-height: 1.6;
+                overflow-x: hidden;
+            }
+
+            .loading-screen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--dark-bg);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                transition: opacity 0.5s ease;
+            }
+
+            .loader {
+                width: 50px;
+                height: 50px;
+                border: 3px solid transparent;
+                border-top: 3px solid #667eea;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
                 }
-                typeGradient();
-            });
 
-            // Typing animation for roles (más grande y más lento)
-            document.addEventListener('DOMContentLoaded', function() {
-                const roles = [
-                    'Frontend Developer',
-                    'Computer Programmer',
-                    'Web Designer'
-                ];
-                const el = document.getElementById('typing-roles');
-                let roleIdx = 0, charIdx = 0, isDeleting = false;
-                function typeRole() {
-                    const current = roles[roleIdx];
-                    if (!isDeleting) {
-                        el.innerHTML = `<span style='background:linear-gradient(90deg,#06b6d4,#2563eb,#00fff7,#ff61f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;font-weight:700;font-size:2.2rem;line-height:1.1;'>${current.slice(0,charIdx)}</span><span class='typing-cursor'>|</span>`;
-                        if (charIdx < current.length) {
-                            charIdx++;
-                            setTimeout(typeRole, 110);
-                        } else {
-                            setTimeout(() => { isDeleting = true; typeRole(); }, 1800);
-                        }
-                    } else {
-                        el.innerHTML = `<span style='background:linear-gradient(90deg,#06b6d4,#2563eb,#00fff7,#ff61f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-fill-color:transparent;font-weight:700;font-size:2.2rem;line-height:1.1;'>${current.slice(0,charIdx)}</span><span class='typing-cursor'>|</span>`;
-                        if (charIdx > 0) {
-                            charIdx--;
-                            setTimeout(typeRole, 60);
-                        } else {
-                            isDeleting = false;
-                            roleIdx = (roleIdx+1)%roles.length;
-                            setTimeout(typeRole, 700);
-                        }
-                    }
+                100% {
+                    transform: rotate(360deg);
                 }
-                typeRole();
-            });
-            </script>
-        <!-- Efecto de partículas animadas -->
-        <script>
-            // Particles background effect (simple, performant)
-            document.addEventListener('DOMContentLoaded', function() {
-                const bg = document.getElementById('particles-bg');
-                if(bg) {
-                    for(let i=0;i<18;i++) {
-                        const s = document.createElement('span');
-                        s.className = 'particle';
-                        s.style.left = Math.random()*100+'vw';
-                        s.style.top = Math.random()*100+'vh';
-                        s.style.width = s.style.height = (Math.random()*18+12)+'px';
-                        s.style.opacity = Math.random()*0.18+0.12;
-                        s.style.background = 'linear-gradient(120deg,#06b6d4,#2563eb,#00fff7)';
-                        s.style.position = 'absolute';
-                        s.style.borderRadius = '50%';
-                        s.style.filter = 'blur(2px)';
-                        s.style.zIndex = 0;
-                        bg.appendChild(s);
-                    }
-                }
-            });
-        </script>
-                <span id="typing-roles" class="typing-roles"></span></div>
-            <p class="hero-description">
-                I recently graduated from Quincy College with a degree in Computer Science Programming and am bilingual in English and Spanish. 
-                As a former student-athlete, I have a strong foundation in teamwork, discipline, and time management, 
-                acquired through college baseball. I'm passionate about technology and problem-solving, with strong skills 
-                in programming and software development.
-            </p>
-            <div class="social-links">
-                <a href="https://github.com/LsMarte" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/luis-marte-shim/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://www.instagram.com/web0.progra/" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.pinterest.com/01Seref/" class="social-link"><i class="fab fa-pinterest"></i></a>
-                <a href="https://www.youtube.com/@LuisMarte-FED" class="social-link"><i class="fab fa-youtube"></i></a>
-            </div>
-            <a href="Luis.docx"><button class="cta-button">Download CV</a></button>
-            
-        </div>
-        <img src="Im1.png" alt="Luis Marte" class="hero-image slide-in-right">
-    </section>
+            }
+        </style>
 
-    <!-- About Section -->
-    <section id="about">
-        <h2 class="section-title gradient-text animate-on-scroll">About <span>Me</span></h2>
-        <div class="about-container section-frame animate-on-scroll">
-            <img src="Im1.png" alt="Luis Marte" class="about-image">
-            <div class="about-content">
-                <h3 class="about-title"><span id="about-typewriter" class="typewriter"></span></h3>
-                <p class="hero-description">
-                    I have gained hands-on experience with web technologies and multiple programming languages, 
-                    and I am committed to developing as a web developer. My background in baseball has taught me 
-                    the importance of perseverance, adaptability, and working effectively in team environments.
-                </p>
-                <div class="about-list">
-                    <div class="about-item">
-                        <i class="fas fa-user"></i>
-                        <div>Full Name: <strong>Luis J. Marte Ovalles</strong></div>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>Email: <strong>Roandy1017@gmail.com</strong></div>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-phone"></i>
-                        <div>Phone Number: <strong>857-399-7397</strong></div>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-graduation-cap"></i>
-                        <div>College Level: <strong>Graduated</strong></div>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>Location: <strong>Boston, MA</strong></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Main stylesheet -->
+        <link rel="stylesheet" href="style1.css">
+    </head>
 
-    <!-- Services Section -->
-    <section id="services">
-        <h2 class="section-title">My <span>Services</span></h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-                <h3 class="service-title">Web Design</h3>
-                <p class="service-description">
-                    As a Front-End Developer, I also utilize Adobe Creative Suite for multimedia design 
-                    and content creation. Tools like Photoshop and Illustrator help me craft visually compelling 
-                    graphics, UI elements, and layouts that enhance the overall design.
-                </p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-globe"></i>
-                </div>
-                <h3 class="service-title">Website Development</h3>
-                <p class="service-description">
-                    As a Front-End Developer, I focus on crafting the user interface (UI) and optimizing 
-                    the user experience (UX) the parts of the website that users directly interact with. 
-                    I build responsive and interactive elements using HTML, CSS, and JavaScript to create 
-                    visually engaging websites.
-                </p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fab fa-wordpress"></i>
-                </div>
-                <h3 class="service-title">WordPress Development</h3>
-                <p class="service-description">
-                    As a Front-End Developer, I specialize in customizing WordPress by developing custom 
-                    themes, plugins, and complete website setups tailored to client needs.
-                </p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <h3 class="service-title">Programming</h3>
-                <p class="service-description">
-                    As a software engineer, my primary programming language is C++. I specialize in 
-                    object-oriented programming (OOP), low-level memory and hardware access, and efficient 
-                    use of the C++ standard library.
-                </p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-palette"></i>
-                </div>
-                <h3 class="service-title">Adobe Creative Suite</h3>
-                <p class="service-description">
-                    I utilize Adobe Creative Suite for multimedia design and content creation including 
-                    Photoshop, Illustrator, and other Adobe tools for professional graphic design and web design.
-                </p>
-            </div>
+    <body>
+        <!-- Loading Screen -->
+        <div class="loading-screen" id="loadingScreen">
+            <div class="loader"></div>
         </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2 class="section-title">My <span>Skills</span></h2>
-        <div class="skills-container">
-            <p class="hero-description" style="text-align: center; margin-bottom: 1rem;">
-                The Skills, tools and technologies I use:
-            </p>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <img src="html1.svg" alt="HTML" class="skill-icon">
-                    <div class="skill-name">HTML</div>
+        <!-- Cursor Follower -->
+        <div class="cursor-follower" id="cursorFollower"></div>
+
+        <!-- Header -->
+        <header id="header" class="header">
+            <nav class="navbar">
+                <a href="#hero" class="logo">
+                    <span class="logo-text">Portfolio</span>
+                    <span class="logo-accent">L.M</span>
+                </a>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+
+                <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
-                <div class="skill-item">
-                    <img src="css1.svg" alt="CSS" class="skill-icon">
-                    <div class="skill-name">CSS</div>
+            </nav>
+        </header>
+
+        <!-- Particles Background -->
+        <div id="particles-js"></div>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-greeting">
+                        <span class="greeting-text" id="greetingText"></span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="title-main">Luis Marte</span>
+                    </h1>
+                    <div class="hero-subtitle">
+                        <span>I'm a </span>
+                        <span class="typing-text" id="typingText"></span>
+                    </div>
+                    <p class="hero-description">
+                          I recently earned a degree in Computer Programming from Quincy College and am fluent in both English and Spanish.
+                            As a former college baseball player, I developed key strengths in teamwork, discipline, and time management.
+                            My passion for technology and problem-solving is supported by a solid background in programming and software development. 
+                            In addition, I have gained valuable skills in web design, web development, and content creation.
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                        <a href="Luis.docx" class="btn btn-secondary" download>Download CV</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/LsMarte" class="social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/luis-marte-shim/" class="social-link"
+                            aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.instagram.com/web0.progra/" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@LuisMarte-FED" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="skill-item">
-                    <img src="Js2.svg" alt="JavaScript" class="skill-icon">
-                    <div class="skill-name">JavaScript</div>
-                </div>
-                <div class="skill-item">
-                    <img src="icons8-c++-96.svg" alt="C++" class="skill-icon">
-                    <div class="skill-name">C++</div>
-                </div>
-                <div class="skill-item">
-                    <img src="icons8-wordpress.svg" alt="WordPress" class="skill-icon">
-                    <div class="skill-name">WordPress</div>
-                </div>
-                <div class="skill-item">
-                    <img src="Adobe3.svg" alt="Photoshop" class="skill-icon">
-                    <div class="skill-name">Photoshop</div>
-                </div>
-                <div class="skill-item">
-                    <img src="Adobe2.svg" alt="Illustrator" class="skill-icon">
-                    <div class="skill-name">Illustrator</div>
-                </div>
-                <div class="skill-item">
-                    <img src="Fig2.svg" alt="Figma" class="skill-icon">
-                    <div class="skill-name">Figma</div>
-                </div>
-                <div class="skill-item">
-                    <img src="adobe.svg" alt="Adobe XD" class="skill-icon">
-                    <div class="skill-name">Adobe XD</div>
-                </div>
-                <div class="skill-item">
-                    <img src="icons8-code-80.png" alt="Premiere Pro" class="skill-icon">
-                    <div class="skill-name">Programming</div>
-                </div>
-                <div class="skill-item">
-                    <img src="capcut.svg" alt="CapCut" class="skill-icon">
-                    <div class="skill-name">CapCut</div>
-                </div>
-                <div class="skill-item">
-                    <img src="icons8-canva.svg" alt="Canva" class="skill-icon">
-                    <div class="skill-name">Canva</div>
+                <div class="hero-image">
+                    <div class="image-container">
+                        <img src="Img/004.png" alt="Luis Marte" class="profile-image" loading="eager">
+                        <div class="image-glow"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow"></div>
+            </div>
+        </section>
 
-    <!-- Contact Section -->
- <form Action="https://formsubmit.co/Roandy1017@gmail.com" method="POST">
-    <section id="contact">
-        
-        <h2 class="section-title">Contact <span>Me</span></h2>
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3 class="contact-title">Get in Touch</h3>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <div>Email: Roandy1017@Gmail.Com</div>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <div>Phone Number: 857-399-7397</div>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div>Location: Boston, MA, USA</div>
+        <!-- About Section -->
+        <section id="about" class="about section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span>About</span> Me
+                </h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="Img/001.png" alt="Luis Marte" loading="lazy">
+                        <div class="about-image-overlay"></div>
+                    </div>
+                    <div class="about-text">
+                        <h3 class="about-subtitle">Frontend Developer & Problem Solver</h3>
+                        <p>
+                            I recently graduated from Quincy College with a degree in Computer Science Programming and am fluent in English and Spanish. My path in technology has been influenced not only by my academic background but also by my experience as a college student-athlete, where I played competitive baseball. This experience instilled in me discipline, perseverance, teamwork, and the ability to work under pressure, qualities I now apply to my work in software development.
+                                        <br><br> As a Christian, my faith plays a fundamental role in who I am as a person and in how I approach life and work. I strive every day to continue applying values ​​such as integrity, humility, and service in everything I do. I believe every talent and opportunity I have is a gift from God, and I aspire to use those gifts to serve others, build meaningful connections, and positively contribute to the world around me.
+                                        <br><br> I have a deep interest in technology and problem-solving, especially in creating functional and user-friendly web applications. Through my studies and personal projects, I have developed a solid foundation in web technologies such as HTML, CSS, JavaScript, and frameworks, in addition to working with languages ​​like C++. These skills allow me to adapt and contribute to a wide range of technical challenges.
+                                        <br><br> What excites me most about software development is the constant opportunity to learn, grow, and collaborate. Whether debugging complex code, improving performance, or working in a team, I approach each task with a spirit of service and a desire to do my best, not only for myself, but for the good of others. I believe in work excellence, not only as a professional responsibility, but also as a way to honor God through my work.
+                                        <br><br> My goal is to continue developing as a web developer, working on meaningful projects that make a difference, and being a positive influence wherever I find myself. I believe my unique combination of technical skills, bilingual communication, and athleticism makes me ideal for collaborative environments with a clear mission. I am passionate about working with others, building a community, and striving every day to grow, both as a developer and as a person.
+                        </p>
+                       
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">15+</span>
+                                <span class="stat-label">Projects Completed</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">2+</span>
+                                <span class="stat-label">Years Experience</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Client Satisfaction</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <input type="text" name="name" class="form-control" placeholder="Your Name" class="contact-inputs" required>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services section">
+            <div class="container">
+                <h2 class="section-title">
+                    My <span>Services</span>
+                </h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="service-title">Web Development</h3>
+                        <p class="service-description">
+                            Creating responsive, modern websites using HTML5, CSS3, JavaScript, and popular frameworks.
+                            Focus on performance, accessibility, and user experience.
+                        </p>
+                        <div class="service-features">
+                            <span class="feature">Responsive Design</span>
+                            <span class="feature">Performance Optimization</span>
+                            <span class="feature">SEO Friendly</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Your Email" class="contact-inputs" required>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fab fa-wordpress"></i>
+                        </div>
+                        <h3 class="service-title">WordPress Development</h3>
+                        <p class="service-description">
+                            Custom WordPress themes and plugins development. From simple blogs to complex
+                            e-commerce solutions, tailored to your specific needs.
+                        </p>
+                        <div class="service-features">
+                            <span class="feature">Custom Themes</span>
+                            <span class="feature">Plugin Development</span>
+                            <span class="feature">E-commerce</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="text" name="subject" class="form-control" placeholder="Subject" class="contact-inputs" required>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="service-title">UI/UX Design</h3>
+                        <p class="service-description">
+                            Designing intuitive user interfaces and experiences using Figma, Adobe XD, and other
+                            design tools. Focus on user-centered design principles.
+                        </p>
+                        <div class="service-features">
+                            <span class="feature">User Research</span>
+                            <span class="feature">Wireframing</span>
+                            <span class="feature">Prototyping</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <textarea class="form-control" name="message" placeholder="Your Message" class="contact-inputs" required></textarea>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="service-title">Programming</h3>
+                        <p class="service-description">
+                            Software development using C++, JavaScript, and other programming languages.
+                            Strong foundation in algorithms and data structures.
+                        </p>
+                        <div class="service-features">
+                            <span class="feature">C++ Development</span>
+                            <span class="feature">JavaScript</span>
+                            <span class="feature">Problem Solving</span>
+                        </div>
                     </div>
-                    <button type="submit" class="cta-button">Send Message</button>
-                </form>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3 class="service-title">Graphic Design</h3>
+                        <p class="service-description">
+                            Creating visual content using Adobe Creative Suite including Photoshop, Illustrator,
+                            and other design tools for web and print media.
+                        </p>
+                        <div class="service-features">
+                            <span class="feature">Adobe Creative Suite</span>
+                            <span class="feature">Brand Identity</span>
+                            <span class="feature">Digital Art</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3 class="service-title">Video Content</h3>
+                        <p class="service-description">
+                            Creating engaging video content for social media, YouTube, and websites using
+                            professional editing tools and storytelling techniques.
+                        </p>
+                        <div class="service-features">
+                            <span class="feature">Video Editing</span>
+                            <span class="feature">Motion Graphics</span>
+                            <span class="feature">Social Media</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
- </form>
-     <!-- Images: Hidden lazy-loading -->
-  <img src="placeholder.jpg" data-src="real-image.jpg" alt="" loading="lazy" style="display: none;">
-  <script>
-    // Dynamically load hidden images
-    document.addEventListener("DOMContentLoaded", function() {
-      const lazyImages = [].slice.call(document.querySelectorAll("img[data-src]"));
-      lazyImages.forEach(function(img) {
-        img.setAttribute("src", img.getAttribute("data-src"));
-      });
-    });
-  </script>
+        </section>
 
-    <footer>
-        <p class="footer-text">Connect with me on social media</p>
-        <div class="footer-links">
-            <a href="https://github.com/LsMarte" class="footer-link"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/luis-marte-shim/" class="footer-link"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.instagram.com/web0.progra" class="footer-link"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.pinterest.com/01Seref/" class="footer-link"><i class="fab fa-pinterest"></i></a>
-            <a href="https://www.youtube.com/@LuisMarte-FED" class="footer-link"><i class="fab fa-youtube"></i></a>
-        </div>
-        <p class="copyright">
-            © 2023 Luis Marte. All Rights Reserved.
-        </p>
-        <!-- Hidden privacy link (access via URL or inspectors) -->
-  <a href="privacy-policy.html" style="opacity: 0; position: absolute; width: 0; height: 0;">Privacy</a>
-    </footer>
+        <!-- Skills Section -->
+        <section id="skills" class="skills section">
+            <div class="container">
+                <h2 class="section-title">
+                    My <span>Skills</span>
+                </h2>
+                <div class="skills-container">
+                    <div class="skills-category">
+                        <h3 class="category-title">Frontend</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <img src="icon/html1.svg" alt="HTML5" class="skill-icon">
+                                <span class="skill-name">HTML5</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" data-level="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <img src="icon/css1.svg" alt="CSS3" class="skill-icon">
+                                <span class="skill-name">CSS3</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" data-level="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <img src="icon/Js2.svg" alt="JavaScript" class="skill-icon">
+                                <span class="skill-name">JavaScript</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" data-level="85"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <script src="index.js"> </script>
-</body>
+                    <div class="skills-category">
+                        <h3 class="category-title">Design</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <img src="icon/Fig2.svg" alt="Figma" class="skill-icon">
+                                <span class="skill-name">Figma</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" data-level="88"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <img src="icon/Adobe3.svg" alt="Photoshop" class="skill-icon">
+                                <span class="skill-name">Photoshop</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" data-level="82"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <img src="icon/Adobe2.svg" alt="Illustrator" class="skill-icon">
+                                <span class="skill-name">Illustrator</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" data-level="78"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-category">
+                        <h3 class="category-title">Development</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <img src="icon/icons8-wordpress.svg" alt="WordPress" class="skill-icon">
+                                <span class="skill-name">WordPress</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" data-level="92"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <img src="icon/icons8-c++-48.svg" alt="C++" class="skill-icon">
+                                <span class="skill-name">C++</span>
+                                <div class="skill-level">
+                                    <div class="skill-progress" data-level="75"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio section">
+            <div class="container">
+                <h2 class="section-title">
+                    My <span>Projects</span>
+                </h2>
+                <div class="portfolio-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="web">Web Design</button>
+                    <button class="filter-btn" data-filter="wordpress">WordPress</button>
+                    <button class="filter-btn" data-filter="app">Applications</button>
+                </div>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" data-category="web">
+                        <div class="portfolio-image">
+                            <img src="https://via.placeholder.com/400x300" alt="Project 1" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <h3>Modern Website</h3>
+                                    <p>Responsive web design with modern UI/UX</p>
+                                    <div class="portfolio-links">
+                                        <a href="#" class="portfolio-link"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="portfolio-link"><i class="fab fa-github"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item" data-category="wordpress">
+                        <div class="portfolio-image">
+                            <img src="https://via.placeholder.com/400x300" alt="Project 2" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <h3>WordPress Theme</h3>
+                                    <p>Custom WordPress theme development</p>
+                                    <div class="portfolio-links">
+                                        <a href="#" class="portfolio-link"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="portfolio-link"><i class="fab fa-github"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item" data-category="app">
+                        <div class="portfolio-image">
+                            <img src="https://via.placeholder.com/400x300" alt="Project 3" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <h3>Web Application</h3>
+                                    <p>Interactive web application with JavaScript</p>
+                                    <div class="portfolio-links">
+                                        <a href="#" class="portfolio-link"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="portfolio-link"><i class="fab fa-github"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
+            <div class="container">
+                <h2 class="section-title">
+                    Get In <span>Touch</span>
+                </h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Let's Work Together</h3>
+                        <p>I'm always interested in new opportunities and exciting projects. Let's discuss how we can
+                            bring your ideas to life.</p>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Email</h4>
+                                    <p>Roandy1017@gmail.com</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Phone</h4>
+                                    <p>857-399-7397</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Location</h4>
+                                    <p>Boston, MA, USA</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-input" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" class="form-input" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" class="form-input" placeholder="Your Message" rows="5"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <div id="form-status" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-text">
+                        <p>© 2025 Luis Marte. All rights reserved.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="https://github.com/LsMarte" class="social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/luis-marte-shim/" class="social-link"
+                            aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.instagram.com/web0.progra/" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@LuisMarte-FED" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+        <script src="script1.js"></script>
+        <script src="sw.js"></script>
+    </body>
+
 </html>
-
-
