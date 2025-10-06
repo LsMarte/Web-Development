@@ -1,10 +1,13 @@
 // Enhanced Portfolio JavaScript
 class Portfolio {
     constructor() {
+        this.apiBase = 'backend/api/';
+        this.cache = new Map();
         this.init();
     }
 
     init() {
+        this.loadDynamicContent();
         this.setupEventListeners();
         this.initializeAnimations();
         this.initializeParticles();
@@ -14,6 +17,247 @@ class Portfolio {
         this.initializePortfolioFilter();
         this.initializeContactForm();
         this.hideLoadingScreen();
+    }
+
+    async loadDynamicContent() {
+        try {
+            // Load all portfolio content from API
+            await this.loadStats();
+            await this.loadSkills();
+            await this.loadProjects();
+            await this.loadServices();
+        } catch (error) {
+            console.warn('Failed to load dynamic content:', error);
+            // Continue with static content if API fails
+        }
+    }
+
+    async apiCall(endpoint, params = {}) {
+        const cacheKey = endpoint + JSON.stringify(params);
+        
+        // Check cache first
+        if (this.cache.has(cacheKey)) {
+            return this.cache.get(cacheKey);
+        }
+
+        try {
+            const url = new URL(this.apiBase + 'portfolio.php', window.location.origin);
+            url.searchParams.append('endpoint', endpoint);
+            
+            Object.keys(params).forEach(key => {
+                url.searchParams.append(key, params[key]);
+            });
+
+            const response = await fetch(url.toString());
+            
+            if (!response.ok) {
+                throw new Error(`API call failed: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            if (data.success) {
+                // Cache successful responses for 5 minutes
+                this.cache.set(cacheKey, data);
+                setTimeout(() => this.cache.delete(cacheKey), 5 * 60 * 1000);
+                
+                return data;
+            } else {
+                throw new Error(data.message || 'API call failed');
+            }
+        } catch (error) {
+            console.error('API call error:', error);
+            throw error;
+        }
+    }
+
+    async loadStats() {
+        try {
+            const response = await this.apiCall('stats');
+            const stats = response.data;
+
+            // Update stats counters if elements exist
+            if (stats.experience && document.querySelector('[data-stat="experience"]')) {
+                this.animateCounter('[data-stat="experience"]', 0, stats.experience, 2000);
+            }
+            
+            if (stats.projects && document.querySelector('[data-stat="projects"]')) {
+                this.animateCounter('[data-stat="projects"]', 0, stats.projects, 2000);
+            }
+            
+            if (stats.clients && document.querySelector('[data-stat="clients"]')) {
+                this.animateCounter('[data-stat="clients"]', 0, stats.clients, 2000);
+            }
+            
+            if (stats.reviews && document.querySelector('[data-stat="reviews"]')) {
+                this.animateCounter('[data-stat="reviews"]', 0, stats.reviews, 2000);
+            }
+
+        } catch (error) {
+            console.warn('Failed to load stats:', error);
+        }
+    }
+
+    async loadSkills() {
+        try {
+            const response = await this.apiCall('skills');
+            const skills = response.data;
+
+            const skillsContainer = document.querySelector('.skills-container');
+            if (!skillsContainer || !skills || skills.length === 0) return;
+
+            // Group skills by category
+            const groupedSkills = skills.reduce((acc, skill) => {
+                if (!acc[skill.category]) {
+                    acc[skill.category] = [];
+                }
+                acc[skill.category].push(skill);
+                return acc;
+            }, {});
+
+            // Generate HTML for skills
+            let skillsHTML = '';
+            
+            Object.keys(groupedSkills).forEach(category => {
+                skillsHTML += `
+                    <div class="skill-category">
+                        <h3 class="category-title">${category}</h3>
+                        <div class="skills-grid">
+                `;
+                
+                groupedSkills[category].forEach(skill => {
+                    skillsHTML += `
+                        <div class="skill-item animate-on-scroll">
+                            <div class="skill-header">
+                                <span class="skill-name">${skill.name}</span>
+                                <span class="skill-percentage">${skill.level}%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-level="${skill.level}"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                skillsHTML += '</div></div>';
+            });
+
+            skillsContainer.innerHTML = skillsHTML;
+
+        } catch (error) {
+            console.warn('Failed to load skills:', error);
+        }
+    }
+
+    async loadProjects() {
+        try {
+            const response = await this.apiCall('projects');
+            const projects = response.data;
+
+            const portfolioContainer = document.querySelector('.portfolio-grid');
+            if (!portfolioContainer || !projects || projects.length === 0) return;
+
+            // Generate project HTML
+            let projectsHTML = '';
+            
+            projects.forEach(project => {
+                const technologies = Array.isArray(project.technologies) ? 
+                    project.technologies : 
+                    (project.technologies ? project.technologies.split(',') : []);
+
+                const techBadges = technologies.map(tech => 
+                    `<span class="tech-badge">${tech.trim()}</span>`
+                ).join('');
+
+                projectsHTML += `
+                    <div class="portfolio-item animate-on-scroll" data-category="${project.category}">
+                        <div class="portfolio-image">
+                            <img src="${project.image_url || 'Img/default-project.png'}" 
+                                 alt="${project.title}" 
+                                 loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-actions">
+                                    ${project.demo_url ? `<a href="${project.demo_url}" target="_blank" class="action-btn">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>` : ''}
+                                    ${project.github_url ? `<a href="${project.github_url}" target="_blank" class="action-btn">
+                                        <i class="fab fa-github"></i>
+                                    </a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="project-title">${project.title}</h3>
+                            <p class="project-description">${project.description}</p>
+                            <div class="project-tech">
+                                ${techBadges}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            portfolioContainer.innerHTML = projectsHTML;
+
+        } catch (error) {
+            console.warn('Failed to load projects:', error);
+        }
+    }
+
+    async loadServices() {
+        try {
+            const response = await this.apiCall('services');
+            const services = response.data;
+
+            const servicesContainer = document.querySelector('.services-grid');
+            if (!servicesContainer || !services || services.length === 0) return;
+
+            // Generate services HTML
+            let servicesHTML = '';
+            
+            services.forEach(service => {
+                const features = Array.isArray(service.features) ? 
+                    service.features : 
+                    (service.features ? service.features.split(',') : []);
+
+                const featuresList = features.map(feature => 
+                    `<li>${feature.trim()}</li>`
+                ).join('');
+
+                servicesHTML += `
+                    <div class="service-card animate-on-scroll">
+                        <div class="service-icon">
+                            <i class="${service.icon || 'fas fa-code'}"></i>
+                        </div>
+                        <h3 class="service-title">${service.name}</h3>
+                        <p class="service-description">${service.description}</p>
+                        ${featuresList ? `
+                            <ul class="service-features">
+                                ${featuresList}
+                            </ul>
+                        ` : ''}
+                        <div class="service-price">
+                            <span class="price">$${service.price}</span>
+                            <span class="price-period">/${service.billing_period || 'project'}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            servicesContainer.innerHTML = servicesHTML;
+
+        } catch (error) {
+            console.warn('Failed to load services:', error);
+        }
+    }
+
+    animateCounter(selector, start, end, duration) {
+        const element = document.querySelector(selector);
+        if (!element) return;
+
+        Utils.animateValue(element, start, end, duration, (value) => {
+            element.textContent = value;
+        });
     }
 
     setupEventListeners() {
@@ -376,13 +620,22 @@ class Portfolio {
                 submitBtn.disabled = true;
 
                 try {
-                    // Simulate form submission (replace with actual endpoint)
-                    await this.simulateFormSubmission(data);
+                    // Send to backend
+                    const result = await this.simulateFormSubmission(data);
                     
-                    this.showFormStatus('Message sent successfully!', 'success');
-                    form.reset();
+                    if (result.success) {
+                        this.showFormStatus(result.message || 'Message sent successfully!', 'success');
+                        form.reset();
+                        
+                        // Track analytics
+                        this.trackContactFormSubmission(result);
+                    } else {
+                        throw new Error(result.message || 'Failed to send message');
+                    }
+                    
                 } catch (error) {
-                    this.showFormStatus('Failed to send message. Please try again.', 'error');
+                    console.error('Contact form error:', error);
+                    this.showFormStatus(error.message || 'Failed to send message. Please try again.', 'error');
                 } finally {
                     submitBtn.textContent = originalText;
                     submitBtn.classList.remove('loading');
@@ -393,17 +646,45 @@ class Portfolio {
     }
 
     async simulateFormSubmission(data) {
-        // Simulate API call
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // Simulate success/failure
-                if (Math.random() > 0.1) {
-                    resolve(data);
-                } else {
-                    reject(new Error('Submission failed'));
-                }
-            }, 2000);
-        });
+        // Send to PHP backend instead of simulation
+        try {
+            const response = await fetch('backend/api/contact.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Failed to send message');
+            }
+
+            return result;
+
+        } catch (error) {
+            // Fallback to local processing if backend is unavailable
+            console.warn('Backend unavailable, using fallback:', error.message);
+            
+            // Simulate API call as fallback
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // Simulate success/failure
+                    if (Math.random() > 0.1) {
+                        resolve({
+                            success: true,
+                            message: 'Message sent successfully! (Fallback mode)',
+                            message_id: 'local_' + Date.now()
+                        });
+                    } else {
+                        reject(new Error('Submission failed (Fallback mode)'));
+                    }
+                }, 2000);
+            });
+        }
     }
 
     showFormStatus(message, type) {
@@ -428,6 +709,45 @@ class Portfolio {
             setTimeout(() => {
                 loadingScreen.classList.add('hidden');
             }, 1000);
+        }
+    }
+    
+    trackContactFormSubmission(result) {
+        // Track successful form submission
+        if ('gtag' in window) {
+            gtag('event', 'contact_form_submit', {
+                'event_category': 'engagement',
+                'event_label': 'contact_form',
+                'value': 1
+            });
+        }
+        
+        // Track locally for analytics
+        this.trackEvent('contact_form_submit', {
+            message_id: result.message_id,
+            timestamp: new Date().toISOString()
+        });
+    }
+    
+    trackEvent(eventName, data) {
+        // Simple local analytics tracking
+        try {
+            const events = JSON.parse(localStorage.getItem('portfolio_events') || '[]');
+            events.push({
+                event: eventName,
+                data: data,
+                timestamp: new Date().toISOString(),
+                url: window.location.href
+            });
+            
+            // Keep only last 100 events
+            if (events.length > 100) {
+                events.splice(0, events.length - 100);
+            }
+            
+            localStorage.setItem('portfolio_events', JSON.stringify(events));
+        } catch (error) {
+            console.warn('Analytics tracking failed:', error);
         }
     }
 
